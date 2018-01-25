@@ -23,6 +23,7 @@ namespace WebEF.Controllers
             Person me = new Person();
             me.Name = "Bob";
             me.Age = 99;
+            me.City = "LA";
             db.people.Add(me);  // Adds Bob to DB
             db.SaveChanges();   // saves the changes
 
@@ -30,3 +31,39 @@ namespace WebEF.Controllers
         }
     }
 }
+/*
+ * 
+//// Web.Config
+
+<connectionStrings>
+    <add name="ConnectionName" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDbFile.mdf;Initial Catalog=MyDbFile;Integrated Security=True" providerName="System.Data.SqlClient" />
+</connectionStrings>
+
+//// DbContext
+
+public class MyDBcontext : DbContext
+    {
+        public MyDBcontext () : base("ConnectionName")
+	{ }
+
+	//public DbSet<ExClass> ExClasses { get; set; }
+
+    }
+
+//// Package Manager Console
+
+// For when you only have one DbContext
+Enable-Migrations -EnableAutomaticMigrations
+
+// For when you have more then one DbContext
+Enable-Migrations -ContextTypeName AppName.Models.MyDbContext -MigrationsDirectory Migrations\MyDbContext
+
+// For when you only have one DbContext
+Update-Database
+
+// If your changes of Class/Model might remove data from you Database
+Update-Database -Force
+
+// For when you have more then one Migrations Configuration
+Update-Database -ConfigurationTypeName AppName.Migrations.MyDbContext.Configuration
+ * */

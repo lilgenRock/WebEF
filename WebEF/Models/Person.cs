@@ -14,6 +14,7 @@ namespace WebEF.Models
 
         public int Age { get; set; }
 
+        public string City { get; set; }
 
 
     }
